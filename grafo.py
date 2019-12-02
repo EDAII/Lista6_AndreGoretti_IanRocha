@@ -17,20 +17,20 @@ listaI = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'A', 'J']
 listaJ = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'A']
 
 
-def dfs_paths(graph, start, goal):
-    stack = [(start, [start])]
-    while stack:
-        (vertex, path) = stack.pop()
-        for next in graph[vertex] - set(path):
-            if next == goal:
-                yield path + [next]
+def caminhosDFS(grafo, start, goal):
+    pilha = [(start, [start])]
+    while pilha:
+        (vertice, aresta) = pilha.pop()
+        for vizinho in grafo[vertice] - set(aresta):
+            if vizinho == goal:
+                yield aresta + [vizinho]
             else:
-                stack.append((next, path + [next]))
+                pilha.append((vizinho, aresta + [vizinho]))
 
 
 
 
-graph = {'A': set([random.choice(listaA), random.choice(listaA)]),
+grafo = {'A': set([random.choice(listaA), random.choice(listaA)]),
          'B': set([random.choice(listaB), random.choice(listaB), random.choice(listaB)]),
          'C': set([random.choice(listaC), random.choice(listaC)]),
          'D': set([random.choice(listaD)]),
@@ -42,11 +42,11 @@ graph = {'A': set([random.choice(listaA), random.choice(listaA)]),
          'J': set([random.choice(listaI)]),
          }
 
-print(graph)
-caminhos = list(dfs_paths(graph, 'A', 'F'))
-print(caminhos)
 
-#print(path)
+caminhos = list(caminhosDFS(grafo, 'A', 'F'))
+
+
+
 numero = 40
 caminho_menor = []
 for x in caminhos:
@@ -54,8 +54,8 @@ for x in caminhos:
         caminho_menor = x
         numero = len(x)
 
-print(caminho_menor)
-G = nx.DiGraph(graph)
+
+G = nx.DiGraph(grafo)
 pos = nx.spring_layout(G)
 nx.draw_networkx_nodes(G,pos)
 nx.draw_networkx_edges(G,pos)
