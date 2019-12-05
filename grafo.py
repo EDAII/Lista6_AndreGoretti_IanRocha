@@ -8,31 +8,32 @@ import time
 
 
 listaJ = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'A', 'J']
+listaA = ['B', 'C', 'D', 'E', 'G', 'H', 'I', 'J']
 
 
-def caminhosDFS(grafo, start, goal):
-    pilha = [(start, [start])]
+def caminhosDFS(grafo, inicio, final):
+    pilha = [(inicio, [inicio])]
     while pilha:
         (vertice, aresta) = pilha.pop()
         for vizinho in grafo[vertice] - set(aresta):
-            if vizinho == goal:
+            if vizinho == final:
                 yield aresta + [vizinho]
             else:
                 pilha.append((vizinho, aresta + [vizinho]))
 
-def bfs_paths(graph, start, goal):
-    queue = [(start, [start])]
-    while queue:
-        (vertex, path) = queue.pop(0)
-        for next in graph[vertex] - set(path):
-            if next == goal:
-                yield path + [next]
+def caminhoBFS(grafo, inicio, final):
+    pilha = [(inicio, [inicio])]
+    while pilha:
+        (vertice, caminho) = pilha.pop(0)
+        for next in grafo[vertice] - set(caminho):
+            if next == final:
+                yield caminho + [next]
             else:
-                queue.append((next, path + [next]))
+                pilha.append((next, caminho + [next]))
 
-def shortest_path(graph, start, goal):
+def shortest_path(grafo, inicio, final):
     try:
-        return next(bfs_paths(graph, start, goal))
+        return next(caminhoBFS(grafo, inicio, final))
     except StopIteration:
         return []          
 
@@ -56,8 +57,12 @@ grafo = {'A': set([]),
 
 for node in grafo:
     ale = random.randint(1, ligacoes)
+    print(node)
     for i in range(ale):
-        grafo[node].add(random.choice(listaJ))        
+        if node == 'A':
+            grafo[node].add(random.choice(listaA))
+        else :   
+            grafo[node].add(random.choice(listaJ))        
 
 
 # shortest_path(grafo, 'A', 'F')
