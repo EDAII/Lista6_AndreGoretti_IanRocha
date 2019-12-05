@@ -6,12 +6,13 @@
 | 16/0124778 | Ian Rocha |  
 | 16/0112028 | André Goretti |  
 ## Descrição do projeto
-Aqui você deve dizer o objetivo deste projeto e o que realmente foi feito neste repositório.
+O projeto sem tem base em um jogo simples usando grafo, onde o jogador tem que olhar um grapho direcional e achar o menor caminho entre eles.
 ## Guia de instalação
-Aqui devem estar descritas as dependências do projeto (versões de linguagens e ferramentas) e as instruções necessárias para executar o projeto. 
+Além do python, as bibliotecas matlib e networkx devem ser instaladas
 ### Dependências do projeto
 ### Como executar o projeto
- 
+ apenas execute
+ >python3 grafo.py
 ## Conclusões
 Aqui você diz se o algoritmo utilizado foi útil, se tem limitações, etc.
 ## Referências
