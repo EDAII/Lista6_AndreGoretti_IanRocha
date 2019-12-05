@@ -2,19 +2,12 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import string
 import random
+import time
 
 
 
-listaA = ['B', 'C', 'D', 'E', 'G', 'H', 'I', 'J']
-listaB = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
-listaC = ['B', 'A', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
-listaD = ['B', 'C', 'A', 'E', 'F', 'G', 'H', 'I', 'J']
-listaE = ['B', 'C', 'D', 'A', 'F', 'G', 'H', 'I', 'J']
-listaF = ['B', 'C', 'D', 'E', 'A', 'G', 'H', 'I', 'J']
-listaG = ['B', 'C', 'D', 'E', 'F', 'A', 'H', 'I', 'J']
-listaH = ['B', 'C', 'D', 'E', 'F', 'G', 'A', 'I', 'J']
-listaI = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'A', 'J']
-listaJ = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'A']
+
+listaJ = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'A', 'J']
 
 
 def caminhosDFS(grafo, start, goal):
@@ -44,22 +37,28 @@ def shortest_path(graph, start, goal):
         return []          
 
 
- 
+ligacoes = int(input("Selecione Ate quantos vertices terá em cada nó: "))
 
 
 
 
-grafo = {'A': set([random.choice(listaA), random.choice(listaA)]),
-         'B': set([random.choice(listaB), random.choice(listaB), random.choice(listaB)]),
-         'C': set([random.choice(listaC), random.choice(listaC)]),
-         'D': set([random.choice(listaD)]),
-         'E': set([random.choice(listaE), random.choice(listaE)]),
-         'F': set([random.choice(listaF)]),
-         'G': set([random.choice(listaG), random.choice(listaG), random.choice(listaG)]),
-         'H': set([random.choice(listaH)]),
-         'I': set([random.choice(listaH), random.choice(listaH)]),
-         'J': set([random.choice(listaI)]),
+grafo = {'A': set([]),
+         'B': set([]),
+         'C': set([]),
+         'D': set([]),
+         'E': set([]),
+         'F': set([]),
+         'G': set([]),
+         'H': set([]),
+         'I': set([]),
+         'J': set([]),
          }
+
+for node in grafo:
+    ale = random.randint(1, ligacoes)
+    for i in range(ale):
+        grafo[node].add(random.choice(listaJ))        
+
 
 # shortest_path(grafo, 'A', 'F')
 temp = list(shortest_path(grafo, 'A', 'F'))
@@ -80,14 +79,16 @@ else:
 print(caminhos)
 # print(caminho_menor)
 
+
 G = nx.DiGraph(grafo)
 pos = nx.spring_layout(G)
 nx.draw_networkx_nodes(G,pos)
 nx.draw_networkx_edges(G,pos)
 nx.draw_networkx_labels(G,pos)
 
-
+inicio = time.time()
 plt.show()
+fim = time.time()
 lst = []
 n = int(input("Entre o numero de nós: "))
 print("Digite os nós em ordem com letra maiuscula: ")
@@ -100,6 +101,8 @@ print(lst)
 
 if caminhos == lst:
     print("você acertou")
+    print("Seu tempo: ",)
+    print(fim - inicio)
 
 else:
     print("você errou")    
